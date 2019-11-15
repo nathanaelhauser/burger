@@ -1,9 +1,9 @@
-const { getAll } = require('../controllers')
+const { burgers } = require('../controllers')
 
 module.exports = app => {
   
-  app.get('/', (err, data) => {
-    getAll((burgers) => {
+  app.get('/', (req, res) => {
+    burgers.getAll((burgers) => {
       res.render('index', { burgers })
     })
   })

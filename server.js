@@ -1,15 +1,16 @@
 const { join } = require('path')
 const express = require('express')
 const app = express()
+const PORT = process.env.PORT || 3000
 
 app.use(express.json())
-app.use(express.static(join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.static(join(__dirname, 'public')))
 
-app.use('views', join(__dirname, 'views'))
-app.engine('jsx', require('express-react-views').createEngine())
+app.set('views', join(__dirname, 'views'))
 app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
 
-require('./routes/burgerRoutes')(app)
+require('./routes')(app)
 
-app.listen(3000, () => console.log('Listening on port 3000'))
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

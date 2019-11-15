@@ -20,8 +20,8 @@ module.exports = {
     })
   },
 
-  updateOne(id, cb) {
-    db.query('UPDATE TABLE burgers WHERE id = ?', [id], (err, data) => {
+  updateOne(id, devoured, cb) {
+    db.query(`UPDATE burgers SET devoured = "${devoured}" WHERE id = ${id}`, (err, data) => {
       if (err) {
         console.log(err)
       }
@@ -31,7 +31,7 @@ module.exports = {
   },
 
   deleteOne(id, cb) {
-    db.query('DELTE FROM burgers WHERE id = ?', [id], (err, data) => {
+    db.query(`DELTE FROM burgers WHERE id = ${id}`, (err, data) => {
       if (err) {
         console.log(err)
       }
