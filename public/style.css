@@ -1,0 +1,7 @@
+tr.burger {
+  z-index: 1;
+}
+
+div.burger {
+  pointer-events: none;
+}

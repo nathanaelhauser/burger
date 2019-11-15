@@ -1,18 +1,32 @@
 const React = require('react')
 const Layout = require('./Layout')
-const Burger = require('./Burger')
+const BurgerTable = require('./BurgerTable')
+const BurgerForm = require('./BurgerForm')
 
 module.exports = props => {
-  return(
+  return (
     <Layout>
-      {
-        props.burgers.map(burger => {
-          return <div>
-              <Burger name={burger.name} devoured={burger.devoured}></Burger>
-              <hr/>
+      <div className="row">
+        <div className="col s10">
+          <div className="row">
+            <div className="col s12">
+              <BurgerForm />
             </div>
-        })
-      }
+          </div>
+          <div className="row">
+            <div className="col s5">
+              <BurgerTable burgers={
+                props.burgers.filter(burger => !burger.devoured)
+              } title="Prepared" />
+            </div>
+            <div className="col s5">
+              <BurgerTable burgers={
+                props.burgers.filter(burger => burger.devoured)
+              } title="Devoured" />
+            </div>
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }
