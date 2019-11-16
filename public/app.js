@@ -1,11 +1,20 @@
 document.addEventListener('click', e => {
-  console.log(e.target)
+
+  if (e.target.id === `burger-btn`) {
+    e.preventDefault()
+
+    axios.post('/burgers', {
+      name: document.querySelector('#burger-name').value
+    })
+      .then(_ => window.location.reload())
+      .catch(e => console.error(e))
+  }
+
   if (e.target.className === 'burger') {
-    console.log('burger clicked')
-    // axios.put(`/burgers/${e.target.dataset.burgerid}`, 
-    //   { devoured: parseInt(e.target.dataset.devoured) })
-    //   .then(_ => window.location.reload())
-    //   .catch(e => console.error(e))
+    axios.put(`/burgers/${e.target.dataset.burgerid}`, 
+      { devoured: parseInt(e.target.dataset.devoured) ? 0 : 1 })
+      .then(_ => window.location.reload())
+      .catch(e => console.error(e))
   }
 
 })
